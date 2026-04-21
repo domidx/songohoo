@@ -1,0 +1,14 @@
+{
+  "code": "1",
+  "title": "Amazing Grace",
+  "sections": [
+    { "type": "verse", "text": "Amazing grace, how sweet the sound\nThat saved a wretch like me\nI once was lost, but now am found\nWas blind, but now I see" },
+    { "type": "refrain", "text": "Praise the Lord, praise the Lord\nLet the earth hear His voice\nPraise the Lord, praise the Lord\nLet the people rejoice" },
+    { "type": "verse", "text": "'Twas grace that taught my heart to fear\nAnd grace my fears relieved\nHow precious did that grace appear\nThe hour I first believed" },
+    { "type": "refrain", "text": "" },
+    { "type": "verse", "text": "Through many dangers, toils and snares\nI have already come\n'Tis grace that brought me safe thus far\nAnd grace will lead me home" },
+    { "type": "refrain", "text": "" },
+    { "type": "verse", "text": "When we've been there ten thousand years\nBright shining as the sun\nWe've no less days to sing God's praise\nThan when we'd first begun" },
+    { "type": "refrain", "text": "" }
+  ]
+}

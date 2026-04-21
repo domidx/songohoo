@@ -1,0 +1,12 @@
+{
+  "code": "42",
+  "title": "Shine Jesus Shine",
+  "sections": [
+    { "type": "verse", "text": "Lord the light of Your love is shining\nIn the midst of the darkness shining\nJesus, Light of the world, shine upon us\nSet us free by the truth You now bring us\nShine on me, shine on me" },
+    { "type": "refrain", "text": "Shine, Jesus, shine\nFill this land with the Father's glory\nBlaze, Spirit, blaze\nSet our hearts on fire\nFlow, river, flow\nFlood the nations with grace and mercy\nSend forth Your word\nLord, and let there be light" },
+    { "type": "verse", "text": "Lord I come to Your awesome presence\nFrom the shadows into Your radiance\nBy the blood I may enter Your brightness\nSearch me, try me, consume all my darkness\nShine on me, shine on me" },
+    { "type": "refrain", "text": "" },
+    { "type": "verse", "text": "As we gaze on Your kingly brightness\nSo our faces display Your likeness\nEver changing from glory to glory\nMirrored here may our lives tell Your story\nShine on me, shine on me" },
+    { "type": "refrain", "text": "" }
+  ]
+}

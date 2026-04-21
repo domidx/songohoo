@@ -1,0 +1,113 @@
+--------------------------
+ 1. Requirement overview: 
+--------------------------
+An app to create a slide presentation of song lyrics (verses/refrains) to present to people to sing, including a list of songs at the beginning of the presentation.
+The app has a tool to maintain (add/edit) songs stored in a structured format files (one file per song).
+The app name is Songohoo.
+
+----------------
+ 2. Technology:
+----------------
+A client webpage using html, javascript, css. 
+All code is in a single standalone file to simplify use in any web-browser, easy transfer between computers, no need for any installation, no external libraries, so pure basic javascript. 
+File name is songohoo.html.
+
+-------------
+ 3. Details:
+-------------
+The webpage has two tabs.
+The first tab is used to create/edit songs.
+The second tab is used to select songs for the presentation and dynamically generate and display the presentation itself.
+Each song, in terms of its data, is defined by a code (e.g. song number from an existing song book where the songs are already numbered), but allow also characters in the code, the code is optional, then a song name and finally verses and optional refrain. The song is stored in a structured file (e.g. json format) locally.
+
+ 3.1 First tab (Song) details:
+-------------------------------
+The screen of the first tab allows to create a new song or edit an existing one.
+Following input fields/buttons are on the screen:
+- a file selection button to allow selecting a file with a song from the local filesystem.
+- a save song button.
+- an input field for a song code.
+- an input field for a song title.
+- a textarea field to type/enter the verse/refrain, including a delete button/red x icon (to remove the verse/refrain). Consider a tickbox indicating refrain. Dynamically add new textarea field for verse/refrain (including the delete button/icon and the refrain indicator) whenever user adds a text into last textare. The delete button/icon cannot be present at the very first textarea.
+
+To create a new song, user needs to provide the song code (the code is optional, can be left blank), title and at least one verse/refrain. Verses and refrain must go in expected order. When a textarea is marked as refrain, the text doesn't need to be repeated after ach verse, user can mark the empty textarea as refrain and this information will be used when creating the presentation to read the text of the refrain from the very first refrain text.
+To save the song, users clicks on the save song button, this prepares the entered data in the structured format, open the file save dialog to let user select required folder to store the song data.
+Default the file name in format <code>_<title>.json (consider removing empty spaces in the title and initcap each word). If no code provided, let the file name be just the song title.
+
+To edit an existing song, users cliks on the file selection button, this opens the file open dialog and users navigates and selects the required song to edit.
+The selected file is read, checked that is in the expected format, the data are loaded and filled into the fields on the screen, dynamically creating textareas for each verse/refrain.
+Once user edits the song, clicks on the save button and the song is saved in the same manner as described above to save a new song. User can either select the same file that would be overwritten by the data from the screen, or select a new location/filename.
+
+ 3.2 Second tab (Presentation) details:
+----------------------------------------
+The screen of the second tab initially allows to create a list of songs for the presentation itself.
+
+Following fields are on the screen:
+- an input field for the presentation title.
+- a file selection button to allow selecting a logo picture to be displayed in the list of songs during presentation.
+- a field to enter the colour code for the divider/dot indicator (see list of song table description in 3.2.1.1). This can be either an input field to insert a RGB colour code (12ab34), or if possible, some kind of colour selection picker popup.
+- a dropdown to select max line per slide value (from 1 up to 20).
+- in a row, an input field to allow optional short song description, readonly fields for song code and song title, a file selection button to allow selecting a file with a song from local filesystem. A delete button/icon to remove song from the list. Dynamically create another row like the one just described when user selects a song file in the last row. The delete button/icon cannot be shown against the very first row.
+- a button to start the presentation.
+- a save button to save the song list/presentation (see 3.2.2).
+
+When user clicks on the file selection button to select a song, the file open dialog is open and user navigates and selects a required song file. The data are loaded, song code and song title are populated in the respective fields on the screen, the song data (verses/refrain) are stored in memory (those will later be used to create the slides).
+
+Values selected for the colour of the divider and max line per slide can be stored in cookies so when the webpage is started again, those can be defaulted from the cookies values.
+
+ 3.2.1 Presentation
+ -------------------
+Once user is happy with the song list, clicks on the button to start the presentation. The presentation is generated in the following format with slides as follows, with black background and white letters:
+- List of songs (see 3.2.1.1).
+- First verse of the first song. If the song has a refrain and it fits on the slide together with the verse (as per max line per slide value), fit it in.
+- Refrain of the first song, if exists and if it doesn't fit on the slide together with the verse (see description of the previous slide).
+- Repeat for all remaining verses/refrains.
+- The next slide after the last verse/refrain of the song is the list of songs again.
+- First verse of the second song, including refrain if fits on the slide (as per max line per slide value).
+- Repeat for all remaining verses/refrains.
+- The next slide after the last verse/refrain of the song is the list of songs again.
+- Repeat for all selected songs.
+- The very last slide is the list of songs again.
+
+ 3.2.1.1 "List of songs" slide
+-------------------------------
+This is a table with columns and rows as follows:
+
+<presentation title> <small logo, if selected, optional>
+<a divider, e.g. a line, colour as selected>
+<desc  >    <song 1 title>          <song code>
+            <song 2 title     >     <song code>
+<desc    >  <song 3 title  >        <song code>
+<desc>      <song x title    >      <song code>
+
+The columns are nicely alligned. Remember that the song description is optional, so can be left blank.
+There is going to be a fourth column as well. In that column, there is going to be a "next song" indicator (e.g. a dot, a little circle, in the same colour as the line divider after the presentation title). As the song list slide is going to be displayed at the beginning of the presentation and between the songs, the indicator will indicate which song is going to be next; so on the very first slide the indicator is going to be shown against the first song, on the song list slide after the first song the indicator will be shown against the second song, and so on. As the song list slide will be on the very last slide as well, there will be no indicator at all on that last slide.
+
+The text for the presentation title can be slightly larger than the character size of the desc/song title/song code.
+
+The size of the table is adjusted to fit the dimension of the whole screen.
+
+ 3.2.1.2 Verse/refrain slides
+------------------------------`
+The format of the slides for the verses/refrains of each song is as follows.
+At the top of each slide, on one line, there is going to be song name and song code. The size of the characters is smaller that the size of the characters of the verse/refrain.
+Using the max lines per slide value, check number of lines of each verse and following refrain (remember, refrains are optional, so there can be songs without refrains) and if verse and refrain lines in total can fit into the value, create one slide with verse and refrain. There is going to be an empty row between verse and refrain to visually divide, so take this into account too. For songs without refrain, if max lines per slide value allows to show two verses on slide, show them on one slide.
+Repeat for all verses/refrain.
+
+The text in the slide is adjusted to fit the dimension of the whole screen.
+
+ 3.2.1.3 Navigation
+--------------------
+Map following keys to the actions:
+- left/right arrow buttons to move to previous/next slide.
+- n to jump to the next List of Songs slide.
+- p to jump to the previous List of Songs slide.
+- longer press of left/right arrows to act in the same manner as n and p buttons.
+- Esc/q to exit the presentation.
+
+When a user exits presentation and changes any presentation setup (e.g. colour, songs, etc) and starts the presentation again, the presentation needs to be rebuilt from scratch based on the new setup.
+
+ 3.2.2 Save presentation
+-------------------------
+Saving a presentation as a code generated for the presentation itself. Save as a standalone html file with all required javascript and css. Open a file save dialog, default the file name as <the text of the presentation title>.html.
+This is to allow user to create a presentation, save it and then use the saved file to present as described in 3.2.1.
